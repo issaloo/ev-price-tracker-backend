@@ -14,6 +14,20 @@ This repo contains code to ...
   - Short term data retention for serving to backend
 - ADD MORE
 
+## Running Django Environments
+
+### Local
+
+```Shell
+python manage.py runserver --settings=main.settings.local
+```
+
+### Production
+
+```Shell
+python manage.py runserver --settings=main.settings.production
+```
+
 ## Running Redis Cache Locally
 
 To work with redis on your local machine:
