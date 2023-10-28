@@ -6,13 +6,15 @@ authors = [
     { name = "Issac Loo", email = "issaloo@umich.edu" },
 ]
 
-requires-python = ">=3.11,<3.12"
+requires-python = ">=3.10,<3.11"
 license = { text = "All Rights Reserved" }
 dependencies = [
     "psycopg2>=2.9.9",
     "google-cloud>=0.34.0",
     "google-cloud-secret-manager>=2.16.4",
     "python-dotenv>=1.0.0",
+    "django>=4.2.6",
+    "djangorestframework>=3.14.0",
 ]
 
 [project.optional-dependencies]
