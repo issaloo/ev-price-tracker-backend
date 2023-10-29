@@ -20,7 +20,7 @@ response = client.access_secret_version(name=name)
 secret_payload = response.payload.data.decode("UTF-8")
 
 
-ALLOWED_HOSTS = [CACHE_HOSTNAME]
+ALLOWED_HOSTS = [CACHE_HOSTNAME, "" # TODO: add frontend]
 DEBUG = False
 CACHES = {
     "default": {

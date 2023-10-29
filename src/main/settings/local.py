@@ -23,7 +23,7 @@ name = f"projects/{GCP_PROJECT_ID}/secrets/redis_cache/versions/{GCP_VERSION_ID}
 response = client.access_secret_version(name=name)
 secret_payload = response.payload.data.decode("UTF-8")
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = ["127.0.0.1", "" # TODO: add frontend]
 DEBUG = True
 CACHES = {
     "default": {
