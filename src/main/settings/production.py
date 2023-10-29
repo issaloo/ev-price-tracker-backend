@@ -13,14 +13,14 @@ GCP_PROJECT_ID = os.getenv("GCP_PROJECT_ID")
 GCP_VERSION_ID = os.getenv("GCP_VERSION_ID")
 
 # load credentials and get payload
-# TODO: add credentials
-client = secretmanager.SecretManagerServiceClient(credentials=credentials)
+# TODO: grant secret manager credentials to google app engine
+client = secretmanager.SecretManagerServiceClient()
 name = f"projects/{GCP_PROJECT_ID}/secrets/redis_cache/versions/{GCP_VERSION_ID}"
 response = client.access_secret_version(name=name)
 secret_payload = response.payload.data.decode("UTF-8")
 
 
-ALLOWED_HOSTS = [CACHE_HOSTNAME, "" # TODO: add frontend]
+ALLOWED_HOSTS = [CACHE_HOSTNAME]  # TODO: ADD allowed host for front end
 DEBUG = False
 CACHES = {
     "default": {

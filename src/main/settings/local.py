@@ -23,7 +23,7 @@ name = f"projects/{GCP_PROJECT_ID}/secrets/redis_cache/versions/{GCP_VERSION_ID}
 response = client.access_secret_version(name=name)
 secret_payload = response.payload.data.decode("UTF-8")
 
-ALLOWED_HOSTS = ["127.0.0.1", "" # TODO: add frontend]
+ALLOWED_HOSTS = ["127.0.0.1", "http://localhost:3000"]
 DEBUG = True
 CACHES = {
     "default": {
@@ -31,7 +31,7 @@ CACHES = {
         "LOCATION": f"redis://127.0.0.1:{CACHE_PORT}",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            "VERSION": "1",
+            "VERSION": f"{CACHE_VERSION}",
             "PASSWORD": secret_payload,
             "SERIALIZER": "django_redis.serializers.json.JSONSerializer",
         },
