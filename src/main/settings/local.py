@@ -17,12 +17,17 @@ from .base import *
 
 
 # TODO: Keep this
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["127.0.0.1", "evpricetrackercache.fly.dev"]
 DEBUG = True
 CACHES = {
     "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379",  # TODO: redis locally
-        # "LOCATION": "redis://username:password@127.0.0.1:6379",
+        "BACKEND": "django_redis.cache.RedisCache",
+        # "LOCATION": "redis://127.0.0.1:6379",  # TODO: redis locally
+        "LOCATION": "redis://default:{PASSWORD}{HOST}:6379",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "VERSION": "1",
+        }
+        
     }
 }

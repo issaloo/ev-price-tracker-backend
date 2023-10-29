@@ -5,8 +5,9 @@ from rest_framework.views import APIView
 
 class GetEvPriceMain(APIView):
     def get(self, request, format=None):
-        ev_price_count = cache["ev_price_count"]
-        # ev_price_count = 1
+        ev_price_count = cache.get(key="ev_price_count")
+        print(cache.keys("*"))
+
         if ev_price_count is not None:
             return Response(ev_price_count)
         else:

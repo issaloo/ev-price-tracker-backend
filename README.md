@@ -18,6 +18,14 @@ This repo contains code to ...
 
 ### Local
 
+Navigate to the src directory
+
+```Shell
+cd src
+```
+
+Run the local settings
+
 ```Shell
 python manage.py runserver --settings=main.settings.local
 ```
