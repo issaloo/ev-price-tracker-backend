@@ -2,9 +2,7 @@
 name = "ev-price-tracker-backend"
 version = "0.0.1"
 description = "EV Price Tracker backend to handle data requests from the frontend"
-authors = [
-    { name = "Issac Loo", email = "issaloo@umich.edu" },
-]
+authors = [{ name = "Issac Loo", email = "issaloo@umich.edu" }]
 
 requires-python = ">=3.10,<3.11"
 license = { text = "All Rights Reserved" }
@@ -27,7 +25,7 @@ dev = [
     "pre-commit>=3.3.3",
     "gitlint>=0.19.1",
     "scalene>=1.5.26",
-    "pandera>=0.16.0"
+    "pandera>=0.16.0",
 ]
 
 [build-system]
@@ -36,14 +34,14 @@ build-backend = "pdm.backend"
 
 [tool.ruff]
 select = [
-    "B",   # flake8-bugbear
-    "C",   # mccabe complexity
-    "E",   # Error
-    "F",   # pyflakes
-    "W",   # Warnings
-    "I",   # isort
-    "PD",  # pandas-vet https://beta.ruff.rs/docs/rules/#pandas-vet-pd
-    "D",   # pydocstyle https://beta.ruff.rs/docs/rules/#pydocstyle-d
+    "B",  # flake8-bugbear
+    "C",  # mccabe complexity
+    "E",  # Error
+    "F",  # pyflakes
+    "W",  # Warnings
+    "I",  # isort
+    "PD", # pandas-vet https://beta.ruff.rs/docs/rules/#pandas-vet-pd
+    "D",  # pydocstyle https://beta.ruff.rs/docs/rules/#pydocstyle-d
 ]
 ignore = [
     "B008", # function-call-in-default-argument
@@ -57,6 +55,7 @@ ignore = [
     "D213", # multi-line-summary-second-line
     "D417", # undocumented-param
     "E501", # line-too-long (handled by black)
+    "F403", # unable-to-detect-undefined-import-names
 ]
 
 [tool.black]

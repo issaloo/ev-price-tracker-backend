@@ -1,12 +1,34 @@
+import os
+
+from dotenv import load_dotenv
+from google.cloud import secretmanager
+
 from .base import *
 
-ALLOWED_HOSTS = []
+load_dotenv()
+CACHE_HOSTNAME = os.getenv("CACHE_HOSTNAME")
+CACHE_PORT = os.getenv("CACHE_PORT")
+CACHE_VERSION = os.getenv("CACHE_VERSION")
+GCP_PROJECT_ID = os.getenv("GCP_PROJECT_ID")
+GCP_VERSION_ID = os.getenv("GCP_VERSION_ID")
+
+# load credentials and get payload
+# TODO: add credentials
+client = secretmanager.SecretManagerServiceClient(credentials=credentials)
+name = f"projects/{GCP_PROJECT_ID}/secrets/redis_cache/versions/{GCP_VERSION_ID}"
+response = client.access_secret_version(name=name)
+secret_payload = response.payload.data.decode("UTF-8")
+
+
+ALLOWED_HOSTS = [CACHE_HOSTNAME]
 DEBUG = False
-DATABASES = {
+CACHES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "local_db",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": f"redis://default:{secret_payload}{CACHE_HOSTNAME}:{CACHE_PORT}",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "VERSION": f"{CACHE_VERSION}",
+        },
     }
 }

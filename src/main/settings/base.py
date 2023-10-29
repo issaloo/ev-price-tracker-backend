@@ -3,8 +3,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-qtugt6sg-8p&4$=ahbj*(s6kkx^z&bsb$g84u&t&je5v=d2$s2"
-# TODO: what do I do with the secret key?
-# make sure to change and create your own and store in secrets manager
+# TODO: make sure to change and create your own and store in secrets manager
 # used for creating accounts, sign-in, etc
 
 INSTALLED_APPS = [

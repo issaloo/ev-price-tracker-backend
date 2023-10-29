@@ -1,7 +1,8 @@
 from django.urls import path
 
-from . import views
+from .views import GetEvPriceMainView, GetGraphModelDetailView
 
 urlpatterns = [
-    path("", views.GetEvPriceMain.as_view()),
+    path("main/", GetEvPriceMainView),
+    path("graph/<str:pk>", GetGraphModelDetailView),
 ]

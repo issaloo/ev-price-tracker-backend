@@ -9,28 +9,41 @@ This repo contains code to ...
 - Secret Manager (GCP)
   - Store secrets
 - Cloud Source Repositories (GCP)
-  - Mirroring this repository for cloud function
+  - Mirror this repository for cloud function
 - Redis (External)
   - Short term data retention for serving to backend
-- ADD MORE
+- Django Rest Framework
+  - Create Rest API
 
 ## Running Django Environments
 
 ### Local
 
-Navigate to the src directory
+1. Navigate to the src directory
 
 ```Shell
 cd src
 ```
 
-Run the local settings
+2. Download the service account credentials json and relocate to the src directory
+
+3. Follow the steps in [Running Redis Cache Locally](#Running-Redis-Cache-Locally)
+
+4. Run the local environment settings
 
 ```Shell
 python manage.py runserver --settings=main.settings.local
 ```
 
 ### Production
+
+1. Navigate to the src directory
+
+```Shell
+cd src
+```
+
+2. Run the production environment settings
 
 ```Shell
 python manage.py runserver --settings=main.settings.production
