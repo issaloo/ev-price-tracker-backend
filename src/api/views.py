@@ -7,27 +7,23 @@ from rest_framework.views import APIView
 # TODO: add authorization that frontend sends along (maybe from header?)
 class GetEvPriceMain(APIView):
 
-    """_summary_.
+    """Get EV Prices from all vehicles in database.
 
     Args:
     ----
-        APIView (_type_): _description_
+        APIView (class): DRF API View
     """
 
-    def get(self, request):  # , format=None what is this format for?
-        """_summary_.
+    def get(self, request):
+        """Get request for data.
 
-        Args:
-        ----
-            request (_type_): _description_
-
-        Raises:
+        Raises
         ------
-            Http404: _description_
+            Http404: 404 Error
 
-        Returns:
+        Returns
         -------
-            _type_: _description_
+            dict: EV price data in json form
         """
         ev_price_json = cache.get(key="ev_price_json")
         if ev_price_json is not None:
@@ -41,28 +37,27 @@ GetEvPriceMainView = GetEvPriceMain.as_view()
 
 class GetGraphModelDetail(APIView):
 
-    """_summary_.
+    """Get graph data for specified EV make and model.
 
     Args:
     ----
-        APIView (_type_): _description_
+        APIView (class): DRF API View
     """
 
     def get(self, request, pk):
-        """_summary_.
+        """Get request for data.
 
         Args:
         ----
-            request (_type_): _description_
-            pk (_type_): _description_
+            pk (str): primary key for database
 
         Raises:
         ------
-            Http404: _description_
+            Http404: 404 Error
 
         Returns:
         -------
-            _type_: _description_
+            dict: graph data in json form
         """
         ev_graph_data = cache.get(key=f"graph_{pk}")
         if ev_graph_data is not None:
