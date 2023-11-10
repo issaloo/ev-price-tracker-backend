@@ -38,3 +38,7 @@ ipython_config.py
 
 # json
 *.json
+
+# environment variables
+.env
+.env*.local
