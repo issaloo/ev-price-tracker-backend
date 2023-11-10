@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repo contains code to ...
+The backend repository is built using Django Rest Framework (DRF) to provide robust API routes for interacting with vehicle data. The integration of Redis as the database adds a layer of efficiency, allowing for fast and responsive data retrieval.
 
 ## Technologies
 
