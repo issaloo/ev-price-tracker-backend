@@ -15,62 +15,6 @@ The backend repository is built using Django Rest Framework (DRF) to provide rob
 - Django Rest Framework
   - Create Rest API
 
-## Running Django Environments
-
-### Local
-
-1. Navigate to the src directory
-
-```Shell
-cd src
-```
-
-2. Download the service account credentials json and relocate to the src directory
-
-3. Follow the steps in [Running Redis Cache Locally](#Running-Redis-Cache-Locally)
-
-4. Run the local environment settings
-
-```Shell
-python manage.py runserver --settings=main.settings.local
-```
-
-### Production
-
-1. Navigate to the src directory
-
-```Shell
-cd src
-```
-
-2. Run the production environment settings
-
-```Shell
-python manage.py runserver --settings=main.settings.production
-```
-
-## Running Redis Cache Locally
-
-To work with redis on your local machine:
-
-1. Set up network proxy to the redis app hosted on Fly.io
-
-```shell
-fly proxy 6379 -a evpricetrackercache
-```
-
-2. Open another terminal to connect to the redis app
-
-```shell
-redis-cli
-```
-
-3. Input password to access the redis app
-
-```shell
-auth <password>
-```
-
 ## Contributing
 
 ### General Guidelines
@@ -88,14 +32,19 @@ cd ~/GitHub/issaloo
 git clone git@github.com:issaloo/ev-price-tracker-scraper.git
 cd ev-price-tracker-scraper
 ```
+2. Copy `.env.template` to `.env.local` and fill in configs
 
-2. Install pdm globally
+```shell
+cp .env.local.template .env.local
+```
+
+3. Install pdm globally
 
 ```shell
 pip install pdm
 ```
 
-3. Install general & development packages with pdm
+4. Install general & development packages with pdm
 
 ```shell
 pdm install --dev
@@ -109,7 +58,7 @@ pdm install --dev
 pdm install
 ```
 
-3. Activate the virtual environment
+5. Activate the virtual environment
 
 ```shell
 eval $(pdm venv activate)
@@ -172,3 +121,59 @@ deactivate
    - :white_check_mark: You should get automatic fixes to poorly formatted python files with some errors
 
    > :information_source: Ctrl+C to exit commit template
+
+## Running Django Environments
+
+### Local
+
+1. Navigate to the src directory
+
+```Shell
+cd src
+```
+
+2. Download the service account credentials json and relocate to the src directory
+
+3. Follow the steps in [Running Redis Cache Locally](#Running-Redis-Cache-Locally)
+
+4. Run the local environment settings
+
+```Shell
+python manage.py runserver --settings=main.settings.local
+```
+
+### Production
+
+1. Navigate to the src directory
+
+```Shell
+cd src
+```
+
+2. Run the production environment settings
+
+```Shell
+python manage.py runserver --settings=main.settings.production
+```
+
+## Running Redis Cache Locally
+
+To work with redis on your local machine:
+
+1. Set up network proxy to the redis app hosted on Fly.io
+
+```shell
+fly proxy 6379 -a evpricetrackercache
+```
+
+2. Open another terminal to connect to the redis app
+
+```shell
+redis-cli
+```
+
+3. Input password to access the redis app
+
+```shell
+auth <password>
+```
