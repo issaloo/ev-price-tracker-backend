@@ -1,1 +1,174 @@
-# ev-price-tracker-backend
+# EV Price Tracker - Backend
+
+## Overview
+
+The backend repository is built using Django Rest Framework (DRF) to provide robust API routes for interacting with vehicle data. The integration of Redis as the database adds a layer of efficiency, allowing for fast and responsive data retrieval.
+
+## Technologies
+
+- Secret Manager (GCP)
+  - Store secrets
+- Cloud Source Repositories (GCP)
+  - Mirror this repository for cloud function
+- Redis (External)
+  - Short term data retention for serving to backend
+- Django Rest Framework
+  - Create Rest API
+
+## Running Django Environments
+
+### Local
+
+1. Navigate to the src directory
+
+```Shell
+cd src
+```
+
+2. Download the service account credentials json and relocate to the src directory
+
+3. Follow the steps in [Running Redis Cache Locally](#Running-Redis-Cache-Locally)
+
+4. Run the local environment settings
+
+```Shell
+python manage.py runserver --settings=main.settings.local
+```
+
+### Production
+
+1. Navigate to the src directory
+
+```Shell
+cd src
+```
+
+2. Run the production environment settings
+
+```Shell
+python manage.py runserver --settings=main.settings.production
+```
+
+## Running Redis Cache Locally
+
+To work with redis on your local machine:
+
+1. Set up network proxy to the redis app hosted on Fly.io
+
+```shell
+fly proxy 6379 -a evpricetrackercache
+```
+
+2. Open another terminal to connect to the redis app
+
+```shell
+redis-cli
+```
+
+3. Input password to access the redis app
+
+```shell
+auth <password>
+```
+
+## Contributing
+
+### General Guidelines
+
+Please take a look at the following guides on writing code:
+
+- [PEP 8 Style Guide](https://www.python.org/dev/peps/pep-0008/) for Python
+
+### Set Up Development Environment
+
+1. Clone and navigate to the repository
+
+```shell
+cd ~/GitHub/issaloo
+git clone git@github.com:issaloo/ev-price-tracker-scraper.git
+cd ev-price-tracker-scraper
+```
+
+2. Install pdm globally
+
+```shell
+pip install pdm
+```
+
+3. Install general & development packages with pdm
+
+```shell
+pdm install --dev
+```
+
+> :information_source: This will install packages [pre-commit](https://pre-commit.com/), [commitizen](https://commitizen-tools.github.io/commitizen/), and [gitlint](https://jorisroovers.com/gitlint/latest/)
+
+(Optional) Install only the general packages
+
+```shell
+pdm install
+```
+
+3. Activate the virtual environment
+
+```shell
+eval $(pdm venv activate)
+```
+
+> :information_source: Virtual environment will use the same python version as the system
+
+(Optional) Deactivate the virtual environment
+
+```shell
+deactivate
+```
+
+### Set Up Standardized Version Control
+
+1. Automate scripts (i.e., linting and autoformatting)
+   ```shell
+   pre-commit install
+   ```
+2. Enforce template at commit with pre-commit
+   ```shell
+   gitlint install-hook
+   ```
+
+### Test It Out
+
+1. **Check if `commitizen` is working**
+
+   - :mag_right: Try using commitizen in command line
+     1. Add files to staging
+     2. Run commitizen
+        ```shell
+        git cz c
+        ```
+        Or, if possible
+        ```shell
+        cz c
+        ```
+   - :white_check_mark: You should get structured commits
+
+2. **Check if `gitlint` is working**
+
+   - :mag_right: Try writing a bad commit
+     1. Add files to staging
+     2. Write a bad commit (e.g., `git commit -m 'WIP: baD commit'`)
+   - :white_check_mark: You should get a question on whether to continue the commit.
+
+3. **Check if `pre-commit` is working**
+
+   - :mag_right:
+     1. Add files to staging, where at least one python file is not formatted well
+     2. Run commitizen
+        ```shell
+        git cz c
+        ```
+        Or, if possible
+        ```shell
+        cz c
+        ```
+   - :white_check_mark: You should get automatic fixes to poorly formatted python files with some errors
+
+   > :information_source: Ctrl+C to exit commit template
