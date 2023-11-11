@@ -176,5 +176,5 @@ gcloud app deploy
 (Optional) Clear deployed app
 
 ```Shell
-gcloud deploy dispatch.yaml
+gcloud app deploy dispatch.yaml
 ```
