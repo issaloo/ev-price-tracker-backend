@@ -4,7 +4,6 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 
-# TODO: add authorization that frontend sends along (maybe from header?)
 class GetEvPriceMain(APIView):
 
     """Get EV Prices from all vehicles in database.

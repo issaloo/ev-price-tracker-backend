@@ -3,8 +3,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-qtugt6sg-8p&4$=ahbj*(s6kkx^z&bsb$g84u&t&je5v=d2$s2"
-# TODO: make sure to change and create your own and store in secrets manager
-# used for creating accounts, sign-in, etc
+# TODO: update for user auth
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -14,6 +13,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework_api_key",
     "django_redis",
 ]
 
@@ -62,6 +62,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework_api_key.permissions.HasAPIKey",
+    ]
+}
 
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
