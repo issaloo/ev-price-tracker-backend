@@ -27,42 +27,51 @@ Please take a look at the following guides on writing code:
 
 1. Clone and navigate to the repository
 
-```shell
-cd ~/GitHub/issaloo
-git clone git@github.com:issaloo/ev-price-tracker-scraper.git
-cd ev-price-tracker-scraper
-```
-2. Copy `.env.template` to `.env.local` and fill in configs
+   ```shell
+   cd ~/GitHub/issaloo
+   git clone git@github.com:issaloo/ev-price-tracker-scraper.git
+   cd ev-price-tracker-scraper
+   ```
 
-```shell
-cp .env.local.template .env.local
-```
+2. Copy `.env.template` to environment file and fill in configs
+
+For development,
+
+    ```shell
+    cp .env.local.template .env.local
+    ```
+
+For production,
+
+    ```shell
+    cp .env.local.template .env
+    ```
 
 3. Install pdm globally
 
-```shell
-pip install pdm
-```
+   ```shell
+   pip install pdm
+   ```
 
 4. Install general & development packages with pdm
 
-```shell
-pdm install --dev
-```
+   ```shell
+   pdm install --dev
+   ```
 
 > :information_source: This will install packages [pre-commit](https://pre-commit.com/), [commitizen](https://commitizen-tools.github.io/commitizen/), and [gitlint](https://jorisroovers.com/gitlint/latest/)
 
 (Optional) Install only the general packages
 
-```shell
-pdm install
-```
+    ```shell
+    pdm install
+    ```
 
 5. Activate the virtual environment
 
-```shell
-eval $(pdm venv activate)
-```
+   ```shell
+   eval $(pdm venv activate)
+   ```
 
 > :information_source: Virtual environment will use the same python version as the system
 
@@ -126,54 +135,46 @@ deactivate
 
 ### Local
 
-1. Navigate to the src directory
+1. Download the service account credentials json and relocate to the root of this directory
 
-```Shell
-cd src
-```
+2. Run Redis Cache Locally
 
-2. Download the service account credentials json and relocate to the src directory
+   1. Set up network proxy to the redis app hosted on Fly.io
 
-3. Follow the steps in [Running Redis Cache Locally](#Running-Redis-Cache-Locally)
+      ```shell
+      fly proxy 6379 -a evpricetrackercache
+      ```
 
-4. Run the local environment settings
+   2. Open another terminal to connect to the redis app
 
-```Shell
-python manage.py runserver --settings=main.settings.local
-```
+      ```shell
+      redis-cli
+      ```
+
+   3. Input password to access the redis app
+
+      ```shell
+      auth <password>
+      ```
+
+3. Run the local environment settings
+
+   ```Shell
+   python manage.py runserver --settings=main.settings.local
+   ```
 
 ### Production
 
-1. Navigate to the src directory
+1. If you have not already, navigate to the repo and deploy
 
 ```Shell
-cd src
+gcloud app deploy
 ```
 
-2. Run the production environment settings
+2. Point your browser to [https://ev-price-tracker.uc.r.appspot.com/](https://ev-price-tracker.uc.r.appspot.com/)
+
+(Optional) Clear deployed app
 
 ```Shell
-python manage.py runserver --settings=main.settings.production
-```
-
-## Running Redis Cache Locally
-
-To work with redis on your local machine:
-
-1. Set up network proxy to the redis app hosted on Fly.io
-
-```shell
-fly proxy 6379 -a evpricetrackercache
-```
-
-2. Open another terminal to connect to the redis app
-
-```shell
-redis-cli
-```
-
-3. Input password to access the redis app
-
-```shell
-auth <password>
+gcloud deploy dispatch.yaml
 ```
