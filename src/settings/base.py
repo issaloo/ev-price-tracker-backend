@@ -45,7 +45,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "main.wsgi.application"
+WSGI_APPLICATION = "wsgi.application"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
