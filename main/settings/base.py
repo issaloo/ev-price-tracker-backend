@@ -2,8 +2,8 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = "django-insecure-qtugt6sg-8p&4$=ahbj*(s6kkx^z&bsb$g84u&t&je5v=d2$s2"
-# TODO: update for user auth
+# TODO: keep for now, but later update for user auth
+SECRET_KEY = "django-insecure-qtugt6sg-8p&4$=ahbj*(s6kkx^z&bsb$g84u&t&je5v=d2$s2"  # pragma: allowlist secret
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -45,7 +45,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "wsgi.application"
+WSGI_APPLICATION = "main.wsgi.application"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
