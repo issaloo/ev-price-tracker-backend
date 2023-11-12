@@ -83,3 +83,7 @@ _.back
 # json
 
 \*.json
+
+# Ignore local environment
+
+.env.local

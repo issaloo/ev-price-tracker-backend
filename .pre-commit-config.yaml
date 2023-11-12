@@ -3,15 +3,15 @@ repos:
     rev: v4.2.0
     hooks:
       - id: check-added-large-files
-        log_file: 'False'
+        log_file: "False"
       - id: detect-private-key
-        log_file: 'False'
+        log_file: "False"
   - repo: https://github.com/Yelp/detect-secrets
     rev: v1.2.0
     hooks:
       - id: detect-secrets
-        args: [ "--baseline", ".secrets.baseline" ]
-        exclude: package.lock.json
+        args: ["--baseline", ".secrets.baseline"]
+        exclude: package.lock.json|.env.template
   - repo: https://github.com/psf/black
     rev: 23.7.0
     hooks:
