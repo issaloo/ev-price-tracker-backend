@@ -42,3 +42,9 @@ ipython_config.py
 # environment variables
 .env
 .env*.local
+
+# vscode
+.vscode
+
+# pdm build
+.pdm-build
