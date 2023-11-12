@@ -5,6 +5,8 @@ handlers:
   - url: /.*
     script: auto
 
+instance_class: F1
+
 automatic_scaling:
   target_cpu_utilization: 0.8
   min_instances: 1
