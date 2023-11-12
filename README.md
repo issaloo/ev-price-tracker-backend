@@ -27,35 +27,21 @@ Please take a look at the following guides on writing code:
 
 1. Clone and navigate to the repository
 
-   ```shell
+   ```Shell
    cd ~/GitHub/issaloo
    git clone git@github.com:issaloo/ev-price-tracker-scraper.git
    cd ev-price-tracker-scraper
    ```
 
-2. Copy `.env.template` to environment file and fill in configs
+2. Install pdm globally
 
-For development,
-
-    ```shell
-    cp .env.local.template .env.local
-    ```
-
-For production,
-
-    ```shell
-    cp .env.local.template .env
-    ```
-
-3. Install pdm globally
-
-   ```shell
+   ```Shell
    pip install pdm
    ```
 
-4. Install general & development packages with pdm
+3. Install general & development packages with pdm
 
-   ```shell
+   ```Shell
    pdm install --dev
    ```
 
@@ -63,13 +49,13 @@ For production,
 
 (Optional) Install only the general packages
 
-    ```shell
+    ```Shell
     pdm install
     ```
 
 5. Activate the virtual environment
 
-   ```shell
+   ```Shell
    eval $(pdm venv activate)
    ```
 
@@ -77,18 +63,18 @@ For production,
 
 (Optional) Deactivate the virtual environment
 
-```shell
+```Shell
 deactivate
 ```
 
 ### Set Up Standardized Version Control
 
 1. Automate scripts (i.e., linting and autoformatting)
-   ```shell
+   ```Shell
    pre-commit install
    ```
 2. Enforce template at commit with pre-commit
-   ```shell
+   ```Shell
    gitlint install-hook
    ```
 
@@ -99,11 +85,11 @@ deactivate
    - :mag_right: Try using commitizen in command line
      1. Add files to staging
      2. Run commitizen
-        ```shell
+        ```Shell
         git cz c
         ```
         Or, if possible
-        ```shell
+        ```Shell
         cz c
         ```
    - :white_check_mark: You should get structured commits
@@ -120,60 +106,86 @@ deactivate
    - :mag_right:
      1. Add files to staging, where at least one python file is not formatted well
      2. Run commitizen
-        ```shell
+        ```Shell
         git cz c
         ```
         Or, if possible
-        ```shell
+        ```Shell
         cz c
         ```
    - :white_check_mark: You should get automatic fixes to poorly formatted python files with some errors
 
    > :information_source: Ctrl+C to exit commit template
 
-## Running Django Environments
+## Django Environments
 
-### Local
+### Running Locally
 
-1. Download the service account credentials json and relocate to the root of this directory
+1. Set Up Environment Files
 
-2. Run Redis Cache Locally
+   1. Copy `.env.template` to environment file
+
+      ```Shell
+      cp .env.local.template .env.local
+      ```
+
+   2. Fill in configs for `.env.local`
+
+2. Set Up
+
+   1. Download the GCP SA credentials.json
+
+   2. Move to the root of this directory
+
+3. Run Redis Cache Locally
 
    1. Set up network proxy to the redis app hosted on Fly.io
 
-      ```shell
+      ```Shell
       fly proxy 6379 -a evpricetrackercache
       ```
 
    2. Open another terminal to connect to the redis app
 
-      ```shell
+      ```Shell
       redis-cli
       ```
 
    3. Input password to access the redis app
 
-      ```shell
+      ```Shell
       auth <password>
       ```
 
-3. Run the local environment settings
+4. Run the local environment
 
    ```Shell
-   python manage.py runserver --settings=main.settings.local
+   python manage.py runserver --settings=main.settings.dynamic
    ```
 
-### Production
+5. Point your browser to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) and relevant routes
 
-1. If you have not already, navigate to the repo and deploy
+### Deploying to Production
 
-```Shell
-gcloud app deploy
-```
+1. Set Up Environment Files
 
-2. Point your browser to [https://ev-price-tracker.uc.r.appspot.com/](https://ev-price-tracker.uc.r.appspot.com/)
+   1. Copy `.env.template` to environment file
 
-(Optional) Clear deployed app
+      ```Shell
+      cp .env.template .env
+      ```
+
+   2. Fill in configs for `.env`
+
+2. Deploy the App
+
+   ```Shell
+   gcloud app deploy
+   ```
+
+3. Point your browser to [https://ev-price-tracker.uc.r.appspot.com/](https://ev-price-tracker.uc.r.appspot.com/)
+
+(Optional) Clear Deployed App
 
 ```Shell
 gcloud app deploy dispatch.yaml
