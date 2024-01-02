@@ -1,3 +1,4 @@
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -6,15 +7,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-qtugt6sg-8p&4$=ahbj*(s6kkx^z&bsb$g84u&t&je5v=d2$s2"  # pragma: allowlist secret
 
 INSTALLED_APPS = [
+    # built-in
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # third-party
+    "django_redis",
     "rest_framework",
     "rest_framework_api_key",
-    "django_redis",
+    "rest_framework_simplejwt",
+    # custom
+    "api",
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -65,7 +72,10 @@ AUTH_PASSWORD_VALIDATORS = [
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework_api_key.permissions.HasAPIKey",
-    ]
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ],  # TODO: if not working, replace bracket with parentheses
 }
 
 LANGUAGE_CODE = "en-us"
@@ -73,3 +83,14 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 STATIC_URL = "/static/"
+
+
+# TODO: add CORS ALLOWED HERE
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),  # TODO: update this
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ALGORITHM": "HS256",  # TODO: This is HMAC SHA256
+    "SIGNING_KEY": SECRET_KEY,  # TODO: UPDATE THIS TO BE IMPORTED FROM DYNAMIC, maybe move this to Dynamic
+    "AUTH_HEADER_TYPES": ("Bearer",),  # TODO: remove this, but note header needs this => Authorization: Bearer <token>
+}

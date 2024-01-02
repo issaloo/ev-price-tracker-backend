@@ -15,9 +15,11 @@ if os.path.exists(local_env):
         credentials = service_account.Credentials.from_service_account_info(credentials)
         client = secretmanager.SecretManagerServiceClient(credentials=credentials)
     load_dotenv(local_env)
+    DEBUG = True
 else:
     client = secretmanager.SecretManagerServiceClient()
     load_dotenv()
+    DEBUG = False
 
 CACHE_HOSTNAME = os.getenv("CACHE_HOSTNAME")
 CACHE_USERNAME = os.getenv("CACHE_USERNAME")
@@ -42,7 +44,7 @@ response = client.access_secret_version(name=name)
 secret_payload_2 = response.payload.data.decode("UTF-8")
 
 ALLOWED_HOSTS = [CACHE_HOSTNAME, DB_HOSTNAME, FRONTEND_URL, BACKEND_URL]
-DEBUG = False
+
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
