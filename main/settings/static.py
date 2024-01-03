@@ -19,12 +19,14 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_api_key",
     "rest_framework_simplejwt",
+    # TODO: "corsheaders"
     # custom
     "api",
-    "users",
+    "users_api",
 ]
 
 MIDDLEWARE = [
+    # TODO: "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -86,10 +88,12 @@ STATIC_URL = "/static/"
 
 
 # TODO: add CORS ALLOWED HERE
+# CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000"]
+# CORS_ALLOWED_CREDENTIALS = True
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),  # TODO: update this
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),  # TODO: Update this
     "ALGORITHM": "HS256",  # TODO: This is HMAC SHA256
     "SIGNING_KEY": SECRET_KEY,  # TODO: UPDATE THIS TO BE IMPORTED FROM DYNAMIC, maybe move this to Dynamic
     "AUTH_HEADER_TYPES": ("Bearer",),  # TODO: remove this, but note header needs this => Authorization: Bearer <token>
