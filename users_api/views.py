@@ -7,8 +7,8 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from .serializers import LoginUserSerializer, RegisterUserSerializer, UserSerializer
 from .validations import (
-    validate_email,
-    validate_password,
+    validate_email_present,
+    validate_password_present,
     validate_registration,
 )
 
@@ -54,8 +54,8 @@ class LoginUser(APIView):
     def post(self, request):
         """Post Login Data."""
         data = request.data
-        assert validate_email(data)
-        assert validate_password(data)
+        assert validate_email_present(data)
+        assert validate_password_present(data)
         serializer = LoginUserSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             user = serializer.check_user(data)

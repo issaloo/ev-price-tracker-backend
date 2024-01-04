@@ -3,7 +3,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-# TODO: keep for now, but later update for user auth
+# TODO: UPDATE THIS SECRET KEY, get from secret manager?
 SECRET_KEY = "django-insecure-qtugt6sg-8p&4$=ahbj*(s6kkx^z&bsb$g84u&t&je5v=d2$s2"  # pragma: allowlist secret
 
 INSTALLED_APPS = [
@@ -99,9 +99,9 @@ CORS_ALLOW_METHODS = (
 )
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),  # TODO: update this
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=20),  # TODO: update this
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),  # TODO: Update this
-    # "ALGORITHM": "HS256",  # TODO: This is HMAC SHA256
+    "ALGORITHM": "HS256",
     "SIGNING_KEY": SECRET_KEY,  # TODO: UPDATE THIS TO BE IMPORTED FROM DYNAMIC, maybe move this to Dynamic
     # "AUTH_HEADER_TYPES": ("Bearer",),  # TODO: remove this, but note header needs this => Authorization: Bearer <token>
 }
