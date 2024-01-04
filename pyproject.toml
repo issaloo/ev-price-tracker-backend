@@ -18,6 +18,7 @@ dependencies = [
     "djangorestframework-api-key>=3.0.0",
     "djangorestframework-simplejwt>=5.3.1",
     "bcrypt>=4.1.2",
+    "django-cors-headers>=4.3.1",
 ]
 
 [project.optional-dependencies]

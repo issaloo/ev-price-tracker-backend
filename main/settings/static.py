@@ -19,14 +19,14 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_api_key",
     "rest_framework_simplejwt",
-    # TODO: "corsheaders"
+    "corsheaders"
     # custom
     "api",
     "users_api",
 ]
 
 MIDDLEWARE = [
-    # TODO: "corsheaders.middleware.CorsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -71,13 +71,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "users_api.CustomUser"
+
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework_api_key.permissions.HasAPIKey",
+        "rest_framework.permissions.IsAuthenticated",
+        "rest_framework_api_key.permissions.HasAPIKey",  # TODO: remove this?
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ],  # TODO: if not working, replace bracket with parentheses
+    ],
 }
 
 LANGUAGE_CODE = "en-us"
@@ -88,13 +91,17 @@ STATIC_URL = "/static/"
 
 
 # TODO: add CORS ALLOWED HERE
-# CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000"]
-# CORS_ALLOWED_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000"]
+CORS_ALLOWED_CREDENTIALS = True
+CORS_ALLOW_METHODS = (
+    "GET",
+    "POST",
+)
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),  # TODO: update this
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),  # TODO: Update this
-    "ALGORITHM": "HS256",  # TODO: This is HMAC SHA256
+    # "ALGORITHM": "HS256",  # TODO: This is HMAC SHA256
     "SIGNING_KEY": SECRET_KEY,  # TODO: UPDATE THIS TO BE IMPORTED FROM DYNAMIC, maybe move this to Dynamic
-    "AUTH_HEADER_TYPES": ("Bearer",),  # TODO: remove this, but note header needs this => Authorization: Bearer <token>
+    # "AUTH_HEADER_TYPES": ("Bearer",),  # TODO: remove this, but note header needs this => Authorization: Bearer <token>
 }

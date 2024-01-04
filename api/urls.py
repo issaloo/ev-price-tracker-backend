@@ -3,6 +3,6 @@ from django.urls import path
 from .views import GetEvPriceMainView, GetGraphModelDetailView
 
 urlpatterns = [
-    path("main/", GetEvPriceMainView),
-    path("graph/<str:pk>", GetGraphModelDetailView),
+    path("main/", GetEvPriceMainView, name="landing_data"),
+    path("graph/<str:pk>", GetGraphModelDetailView, name="graph_data"),
 ]

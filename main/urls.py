@@ -6,5 +6,5 @@ handler400 = "rest_framework.exceptions.bad_request"
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("api.urls")),
-    path("users/", include("users.urls")),
+    path("users/", include("users_api.urls")),
 ]
